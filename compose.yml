@@ -1,0 +1,11 @@
+services:
+    downloader:
+        image: mercenary9312/jetbrains-clients-downloader
+        build:
+            context: .
+        volumes:
+            - ./output:/home/user/output
+        environment:
+            PRODUCT_CODE: ${PRODUCT_CODE:-PY}
+            BUILD_NUMBER: ${BUILD_NUMBER:-252.25557.178}
+            FILENAME: ${FILENAME:-pycharm-clients.tar.gz}
