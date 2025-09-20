@@ -8,20 +8,30 @@
 
 ## Example
 
+Via CLI:
+
 ```bash
-docker run --rm -e PRODUCT_CODE=PY -e BUILD_VERSION=252.25557.178 -e FILENAME=pycharm-clients.tar.gz -v ./output:/home/user/output mercenary9312/jetbrains-clients-downloader
+docker run --rm -v ./output:/home/user/output mercenary9312/jetbrains-clients-downloader --product PY=2025.2.1.1 IU=latest
 ```
 
-With docker compose, you can leverage a `.env` file with the variables defined. Otherwise, the default example values will be used.
+Via Docker Compose:
+
 ```bash
-docker compose up
+docker compose run downlaoder --product PY=2025.2.1.1 IU=latest --filename test.tar.gz
 ```
 
 ## Overview
 
-The `pull-remote.sh` script isolates a single product and build number to keep the tarball size small.
+The `download.sh` script grabs a single product by build number.
 
 Assumption made here is why collect all builds? If in an environment that does not have direct public internet access - you're likely going to need only 1 version until a newer version comes out that's worth upgrading to. (Not saying upgrading isn't worth it, just depends on how much of a pain it is to move things into said environment).
+
+The python script enables a bit more freedom. By using the product code it's able to validate the build number, or grab one based on version, or grab the latest release.
+
+- Can pass in multiple product codes
+- By default, the latest build number is automatically fetched
+- Can specify version number (2025.2.1.1 - for instance), instead of a build number
+  - PY=2025.2.1.1
 
 ## How to get build version
 
