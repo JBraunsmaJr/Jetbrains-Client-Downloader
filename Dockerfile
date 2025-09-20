@@ -1,5 +1,8 @@
 FROM ubuntu:25.10
 
+MAINTAINER "JBraunsmaJr"
+LABEL github="https://github.com/JBraunsmaJr/Jetbrains-Client-Downloader"
+
 WORKDIR /home/user
 
 RUN apt-get update && \
