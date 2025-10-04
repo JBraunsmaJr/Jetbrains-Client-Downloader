@@ -17,7 +17,7 @@ docker run --rm -v ./output:/home/user/output mercenary9312/jetbrains-clients-do
 Via Docker Compose:
 
 ```bash
-docker compose run downlaoder --product PY=2025.2.1.1 IU=latest --filename test.tar.gz
+docker compose run downloader --product PY=2025.2.1.1 IU=latest --filename test.tar.gz
 ```
 
 ## Overview
