@@ -1,7 +1,9 @@
 import os
+import sys
 
 import requests
 import argparse
+import subprocess
 
 URL: str = "https://data.services.jetbrains.com/products?code={product_codes}"
 DOWNLOAD_DIR="/home/user/clients"
@@ -87,8 +89,19 @@ if __name__ == "__main__":
     search_products = parse_args()
     fetch_product_data(search_products)
     for product in search_products:
-        exit_code = os.system(f"/home/user/download.sh \"{product.product_code}\" \"{product.build_number}\"")
-        if exit_code != 0:
+
+        print(product)
+
+        result = subprocess.run(
+            " ".join(["/home/user/download.sh", product.product_code, product.build_number]),
+            check=False,
+            capture_output=True,
+            shell=True
+        )
+
+        if result.returncode != 0:
+            print(result.stdout.strip().decode("utf-8"), file=sys.stdout)
+            print(result.stderr.strip().decode("utf-8"), file=sys.stderr)
             raise RuntimeError("Download failed")
 
     os.system(f"tar -cvf \"{OUTPUT_DIR}/{OUTPUT_FILE}\" -C \"{DOWNLOAD_DIR}\" .")

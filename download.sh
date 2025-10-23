@@ -13,6 +13,8 @@ BUILD_NUMBER="$2"
 mkdir -p $OUTPUT_DIR
 mkdir -p $DOWNLOAD_DIR
 
+echo "Attempting to download $PRODUCT_CODE v$BUILD_NUMBER"
+
 ./jetbrains-clients-downloader --products-filter $PRODUCT_CODE --build-filter $BUILD_NUMBER --platforms-filter linux-x64,windows-x64 --download-backends "$DOWNLOAD_DIR"
 ./jetbrains-clients-downloader --products-filter $PRODUCT_CODE --build-filter $BUILD_NUMBER --platforms-filter linux-x64,windows-x64 "$DOWNLOAD_DIR"
 
